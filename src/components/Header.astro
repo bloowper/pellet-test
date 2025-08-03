@@ -5,14 +5,14 @@
 <header class="header">
     <div class="container">
         <div class="header__content">
-            <div class="header__logo" onclick="window.location.href='/'">
+            <div class="header__logo" onclick="window.location.href='/pellet-test/'">
                 <span class="logo-text">Pellet Kawucha</span>
             </div>
             <nav class="header__nav">
-                <a href="/" class="nav-link" data-page="home">Strona główna</a>
-                <a href="/produkty" class="nav-link" data-page="produkty">Produkty</a>
-                <a href="/dostawa" class="nav-link" data-page="dostawa">Dostawa</a>
-                <a href="/kontakt" class="nav-link" data-page="kontakt">Kontakt</a>
+                <a href="/pellet-test/" class="nav-link" data-page="home">Strona główna</a>
+                <a href="/pellet-test/produkty" class="nav-link" data-page="produkty">Produkty</a>
+                <a href="/pellet-test/dostawa" class="nav-link" data-page="dostawa">Dostawa</a>
+                <a href="/pellet-test/kontakt" class="nav-link" data-page="kontakt">Kontakt</a>
             </nav>
             <a href="tel:128456789" class="header__cta-btn">128-456-789</a>
         </div>
@@ -32,8 +32,8 @@
         navLinks.forEach(link => {
             const href = link.getAttribute('href');
             if (href === currentPath || 
-                (href === '/' && currentPath === '') || 
-                (href === '/' && currentPath === '/')) {
+                (href === '/pellet-test/' && (currentPath === '/pellet-test' || currentPath === '/pellet-test/')) || 
+                (href === '/pellet-test/' && currentPath === '')) {
                 link.classList.add('active');
             }
         });
