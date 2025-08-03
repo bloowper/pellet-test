@@ -1,0 +1,144 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Script from '../components/Script.astro';
+---
+
+<Layout title="Nasze Produkty - Premium Pellet Drzewny">
+    <Script />
+    <main class="page-content active">
+        <section class="page-hero">
+            <div class="container">
+                <h1 class="page-hero__title">Nasze Produkty - Premium Pellet Drzewny</h1>
+                <p class="page-hero__subtitle">Wysokiej jakości pellet drzewny z certyfikatem ENplus A1</p>
+            </div>
+        </section>
+
+        <section class="products-section">
+            <div class="container">
+                <div class="products-grid">
+                    <!-- Premium Selection -->
+                    <div class="product-card">
+                        <div class="product-card__header">
+                            <h3 class="product-card__title">PELLET PREMIUM SELECTION (6mm)</h3>
+                            <div class="product-card__certificate">
+                                <span class="cert-icon">⭐</span>
+                                <span>Certyfikat ENplus A1 PL 027</span>
+                            </div>
+                        </div>
+                        <div class="product-card__specs">
+                            <div class="spec-item">
+                                <span class="spec-label">Kaloryczność:</span>
+                                <span class="spec-value">min. 4,6 kWh/kg (16,6 MJ/kg)</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Zawartość popiołu:</span>
+                                <span class="spec-value">max 0,7%</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Wilgotność:</span>
+                                <span class="spec-value">max 10%</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Średnica:</span>
+                                <span class="spec-value">6 +/- 1mm</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Długość:</span>
+                                <span class="spec-value">3,15 - 40 mm</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Gęstość nasypowa:</span>
+                                <span class="spec-value">600-750 kg/m³</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Opakowanie:</span>
+                                <span class="spec-value">worki 15kg, Big Bag 1000kg</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Zastosowanie:</span>
+                                <span class="spec-value">kotły, kominki, piece pelletowe</span>
+                            </div>
+                        </div>
+                        <button class="btn btn--primary" onclick="openQuoteModal()">Zapytaj o cenę</button>
+                    </div>
+
+                    <!-- Excellent Selection -->
+                    <div class="product-card">
+                        <div class="product-card__header">
+                            <h3 class="product-card__title">PELLET EXCELLENT SELECTION (8mm)</h3>
+                            <div class="product-card__certificate">
+                                <span class="cert-icon">⭐</span>
+                                <span>Certyfikat ENplus A1 PL 027</span>
+                            </div>
+                        </div>
+                        <div class="product-card__specs">
+                            <div class="spec-item">
+                                <span class="spec-label">Kaloryczność:</span>
+                                <span class="spec-value">min. 4,8 kWh/kg (17,3 MJ/kg)</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Zawartość popiołu:</span>
+                                <span class="spec-value">max 0,5%</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Wilgotność:</span>
+                                <span class="spec-value">max 8%</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Średnica:</span>
+                                <span class="spec-value">8 +/- 1mm</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Skład:</span>
+                                <span class="spec-value">70% drewno iglaste, 30% liściaste</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Opakowanie:</span>
+                                <span class="spec-value">worki 15kg, Big Bag 1000kg</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Zastosowanie:</span>
+                                <span class="spec-value">kotły przemysłowe, większe instalacje</span>
+                            </div>
+                        </div>
+                        <button class="btn btn--primary" onclick="openQuoteModal()">Zapytaj o cenę</button>
+                    </div>
+
+                    <!-- Standard -->
+                    <div class="product-card">
+                        <div class="product-card__header">
+                            <h3 class="product-card__title">PELLET STANDARD (6mm)</h3>
+                        </div>
+                        <div class="product-card__specs">
+                            <div class="spec-item">
+                                <span class="spec-label">Kaloryczność:</span>
+                                <span class="spec-value">min. 4,4 kWh/kg</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Zawartość popiołu:</span>
+                                <span class="spec-value">max 1,5%</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Wilgotność:</span>
+                                <span class="spec-value">max 12%</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Opakowanie:</span>
+                                <span class="spec-value">worki 15kg</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Zastosowanie:</span>
+                                <span class="spec-value">podstawowe ogrzewanie</span>
+                            </div>
+                        </div>
+                        <button class="btn btn--primary" onclick="openQuoteModal()">Zapytaj o cenę</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</Layout>
+
+<style>
+
+</style>

@@ -1,0 +1,92 @@
+---
+---
+
+<!-- Header -->
+<header class="header">
+    <div class="container">
+        <div class="header__content">
+            <div class="header__logo" onclick="window.location.href='/'">
+                <span class="logo-text">Pellet Kawucha</span>
+            </div>
+            <nav class="header__nav">
+                <a href="/" class="nav-link" data-page="home">Strona główna</a>
+                <a href="/produkty" class="nav-link" data-page="produkty">Produkty</a>
+                <a href="/dostawa" class="nav-link" data-page="dostawa">Dostawa</a>
+                <a href="/kontakt" class="nav-link" data-page="kontakt">Kontakt</a>
+            </nav>
+            <a href="tel:128456789" class="header__cta-btn">128-456-789</a>
+        </div>
+    </div>
+</header>
+
+<style>
+
+</style>
+
+<script>
+    // Add active class to current page
+    document.addEventListener('DOMContentLoaded', () => {
+        const currentPath = window.location.pathname;
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        navLinks.forEach(link => {
+            const href = link.getAttribute('href');
+            if (href === currentPath || 
+                (href === '/' && currentPath === '') || 
+                (href === '/' && currentPath === '/')) {
+                link.classList.add('active');
+            }
+        });
+
+        // Mobile menu toggle
+        const createMobileMenu = () => {
+            const header = document.querySelector('.header');
+            const headerContent = document.querySelector('.header__content');
+            const nav = document.querySelector('.header__nav');
+
+            if (!headerContent || !nav) return;
+
+            // Create mobile menu toggle button if it doesn't exist
+            if (!document.querySelector('.mobile-menu-toggle')) {
+                const mobileToggle = document.createElement('button');
+                mobileToggle.className = 'mobile-menu-toggle';
+                mobileToggle.innerHTML = '☰';
+                mobileToggle.style.display = 'none';
+
+                // Add toggle functionality
+                mobileToggle.addEventListener('click', () => {
+                    nav.classList.toggle('mobile-open');
+                });
+
+                // Close menu when clicking nav links
+                const navLinks = nav.querySelectorAll('.nav-link');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        nav.classList.remove('mobile-open');
+                    });
+                });
+
+                // Insert toggle button
+                headerContent.insertBefore(mobileToggle, nav);
+            }
+        };
+
+        createMobileMenu();
+
+        // Show/hide mobile menu toggle based on screen width
+        const handleResize = () => {
+            const mobileToggle = document.querySelector('.mobile-menu-toggle');
+            if (mobileToggle) {
+                if (window.innerWidth <= 768) {
+                    mobileToggle.style.display = 'block';
+                } else {
+                    mobileToggle.style.display = 'none';
+                    document.querySelector('.header__nav')?.classList.remove('mobile-open');
+                }
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+        handleResize(); // Initial check
+    });
+</script>

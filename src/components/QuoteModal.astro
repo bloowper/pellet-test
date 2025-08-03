@@ -1,0 +1,361 @@
+---
+---
+
+<!-- Quote Modal -->
+<div id="quote-modal" class="modal hidden">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Bezpłatna wycena</h3>
+            <button class="modal-close" id="close-quote-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="quote-form">
+                <div class="form-group">
+                    <label for="name" class="form-label">Imię i nazwisko</label>
+                    <input type="text" id="name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone" class="form-label">Telefon</label>
+                    <input type="tel" id="phone" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" id="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="quantity" class="form-label">Ilość (kg)</label>
+                    <input type="number" id="quantity" class="form-control" min="500" max="3000" value="1000" required>
+                </div>
+                <div class="form-group">
+                    <label for="message" class="form-label">Dodatkowe informacje</label>
+                    <textarea id="message" class="form-control" rows="4"></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn--outline" id="cancel-quote">Anuluj</button>
+                    <button type="submit" class="btn btn--primary">Wyślij zapytanie</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+    }
+
+    .modal.hidden {
+        display: none;
+    }
+
+    .modal-content {
+        background-color: var(--color-white);
+        border-radius: 12px;
+        width: 100%;
+        max-width: 500px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    .modal-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px;
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .modal-header h3 {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    .modal-close {
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: var(--color-text-secondary);
+        padding: 0;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .modal-body {
+        padding: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 16px;
+    }
+
+    .form-label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 500;
+        color: var(--color-text);
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid var(--color-border);
+        border-radius: 8px;
+        font-size: 16px;
+        transition: border-color 0.2s ease;
+    }
+
+    .form-control:focus {
+        outline: none;
+        border-color: var(--color-primary);
+        box-shadow: 0 0 0 3px var(--color-focus-ring);
+    }
+
+    textarea.form-control {
+        resize: vertical;
+        min-height: 80px;
+    }
+
+    .modal-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+        margin-top: 20px;
+    }
+
+    @media (max-width: 576px) {
+        .modal-content {
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal-actions {
+            flex-direction: column;
+        }
+        
+        .modal-actions button {
+            width: 100%;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const quoteModal = document.getElementById('quote-modal');
+        const closeQuoteModal = document.getElementById('close-quote-modal');
+        const cancelQuote = document.getElementById('cancel-quote');
+        const quoteForm = document.getElementById('quote-form');
+        
+        // Function to open modal
+        window.openQuoteModal = () => {
+            if (quoteModal) {
+                quoteModal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+                
+                // Focus first input
+                const firstInput = quoteModal.querySelector('input[type="text"]');
+                if (firstInput) {
+                    setTimeout(() => firstInput.focus(), 100);
+                }
+            }
+        };
+        
+        // Function to close modal
+        const closeModal = () => {
+            if (quoteModal) {
+                quoteModal.classList.add('hidden');
+                document.body.style.overflow = '';
+                
+                // Reset form
+                if (quoteForm) {
+                    quoteForm.reset();
+                }
+            }
+        };
+        
+        // Close modal when clicking close button
+        if (closeQuoteModal) {
+            closeQuoteModal.addEventListener('click', closeModal);
+        }
+        
+        // Close modal when clicking cancel button
+        if (cancelQuote) {
+            cancelQuote.addEventListener('click', closeModal);
+        }
+        
+        // Close modal when clicking outside
+        if (quoteModal) {
+            quoteModal.addEventListener('click', (e) => {
+                if (e.target === quoteModal) {
+                    closeModal();
+                }
+            });
+        }
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && quoteModal && !quoteModal.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
+        
+        // Handle form submission
+        if (quoteForm) {
+            quoteForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                // Get form data
+                const data = {
+                    name: document.getElementById('name')?.value || '',
+                    phone: document.getElementById('phone')?.value || '',
+                    email: document.getElementById('email')?.value || '',
+                    quantity: document.getElementById('quantity')?.value || '',
+                    message: document.getElementById('message')?.value || ''
+                };
+                
+                // Validate required fields
+                if (!data.name || !data.phone || !data.email || !data.quantity) {
+                    showNotification('Proszę wypełnić wszystkie wymagane pola.', 'error');
+                    return;
+                }
+                
+                // Validate email format
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(data.email)) {
+                    showNotification('Proszę podać prawidłowy adres email.', 'error');
+                    return;
+                }
+                
+                // Simulate form submission
+                const submitButton = quoteForm.querySelector('button[type="submit"]');
+                const originalText = submitButton.textContent;
+                
+                submitButton.textContent = 'Wysyłanie...';
+                submitButton.disabled = true;
+                
+                // Simulate API call
+                setTimeout(() => {
+                    showNotification('Zapytanie zostało wysłane! Skontaktujemy się z Państwem w ciągu 24 godzin.', 'success');
+                    closeModal();
+                    
+                    // Reset button
+                    submitButton.textContent = originalText;
+                    submitButton.disabled = false;
+                }, 2000);
+            });
+        }
+        
+        // Notification system
+        window.showNotification = (message, type = 'info') => {
+            // Remove existing notifications
+            const existingNotifications = document.querySelectorAll('.notification');
+            existingNotifications.forEach(notification => notification.remove());
+            
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `notification notification--${type}`;
+            notification.innerHTML = `
+                <div class="notification__content">
+                    <span class="notification__message">${message}</span>
+                    <button class="notification__close">&times;</button>
+                </div>
+            `;
+            
+            // Add notification styles
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: var(--color-surface);
+                border: 1px solid var(--color-border);
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                padding: 16px;
+                z-index: 1001;
+                max-width: 400px;
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+                color: var(--color-text);
+            `;
+            
+            // Set type-specific styles
+            if (type === 'success') {
+                notification.style.borderLeftColor = 'var(--color-success)';
+                notification.style.borderLeftWidth = '4px';
+            } else if (type === 'error') {
+                notification.style.borderLeftColor = 'var(--color-error)';
+                notification.style.borderLeftWidth = '4px';
+            }
+            
+            // Style notification content
+            const notificationContent = notification.querySelector('.notification__content');
+            if (notificationContent) {
+                notificationContent.style.cssText = `
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    gap: 12px;
+                `;
+            }
+            
+            // Style close button
+            const closeButton = notification.querySelector('.notification__close');
+            if (closeButton) {
+                closeButton.style.cssText = `
+                    background: none;
+                    border: none;
+                    font-size: 20px;
+                    cursor: pointer;
+                    color: var(--color-text-secondary);
+                    padding: 0;
+                    width: 24px;
+                    height: 24px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                `;
+                
+                closeButton.addEventListener('click', () => {
+                    notification.style.transform = 'translateX(100%)';
+                    setTimeout(() => {
+                        if (notification.parentElement) {
+                            notification.remove();
+                        }
+                    }, 300);
+                });
+            }
+            
+            // Add to DOM
+            document.body.appendChild(notification);
+            
+            // Trigger animation
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    if (notification.parentElement) {
+                        notification.remove();
+                    }
+                }, 300);
+            }, 5000);
+        };
+    });
+</script>

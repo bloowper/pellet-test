@@ -1,0 +1,254 @@
+---
+---
+
+<style>
+    /* Price information container */
+    .price-info-container {
+        margin: 1.5rem 0;
+        padding: 1rem;
+        background-color: #f8f9fa;
+        border-radius: 0.5rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Base price display */
+    .base-price-display {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+        color: #4b5563;
+    }
+
+    /* Discount message */
+    .discount-message {
+        margin: 0.75rem 0;
+        padding: 0.75rem;
+        border-radius: 0.375rem;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+    }
+
+    /* Discount level classes */
+    .discount-high {
+        background: var(--color-bg-3);
+        border-color: rgba(34, 197, 94, 0.25);
+    }
+
+    .discount-medium {
+        background: var(--color-bg-2);
+        border-color: rgba(245, 158, 11, 0.25);
+    }
+
+    .discount-low {
+        background: var(--color-bg-4);
+        border-color: rgba(239, 68, 68, 0.25);
+    }
+
+    /* Discount text */
+    .discount-text {
+        font-weight: 500;
+    }
+
+    /* Discount percentage */
+    .discount-percent {
+        font-weight: 700;
+        color: #2563eb;
+    }
+
+    /* Total price container */
+    .total-price-container {
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    /* Total price label */
+    .total-price-label {
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: #1f2937;
+    }
+
+    /* Total price value */
+    .total-price-value {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #2563eb;
+    }
+
+    /* Discount amount container */
+    .discount-amount-container {
+        margin-top: 0.5rem;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    /* Discount amount text */
+    .discount-amount-text {
+        font-size: 0.9rem;
+        color: #4b5563;
+    }
+
+    /* Discount amount value */
+    .discount-amount-value {
+        font-weight: 600;
+        color: #2563eb;
+    }
+</style>
+
+<section class="calculator-section">
+    <div class="container">
+        <div class="calculator-section__content">
+            <div class="calculator-section__left">
+                <!-- Left side can contain additional info or be empty -->
+            </div>
+
+            <div class="calculator-section__right">
+                <div class="bulk-calculator">
+                    <h3 class="calculator__title">Kalkulator ceny pelletu</h3>
+                    <div class="calculator__controls">
+                        <div class="slider-container">
+                            <label for="quantity-slider" class="slider-label">Wybierz ilość: 500 kg - 3000 kg</label>
+                            <input type="range" id="quantity-slider" class="quantity-slider" min="500" max="3000" value="1000" step="100">
+                            <div class="slider-value">Ilość: <span id="quantity-display">1000</span> kg</div>
+                        </div>
+
+                        <div class="dropdown-container">
+                            <label for="fuel-type" class="dropdown-label">Rodzaj paliwa</label>
+                            <select id="fuel-type" class="form-control">
+                                <option value="premium">Premium Selection</option>
+                                <option value="excellent">Excellent Selection</option>
+                                <option value="standard">Standard</option>
+                            </select>
+                        </div>
+
+                        <div class="price-info-container">
+                            <div class="base-price-display">
+                                Cena podstawowa: <span id="base-price">0.00</span> PLN/kg
+                            </div>
+                            <div class="discount-message">
+                                <span class="discount-text">Kwalifikujesz się na <span id="discount-percent" class="discount-percent">12</span>% rabatu!</span>
+                            </div>
+                            <div class="total-price-container">
+                                <span class="total-price-label">Cena całkowita:</span>
+                                <span id="total-price" class="total-price-value">0.00</span> PLN
+                            </div>
+                            <div class="discount-amount-container">
+                                <span class="discount-amount-text">Kwota rabatu: <span id="discount-amount" class="discount-amount-value">0.00</span> PLN</span>
+                            </div>
+                        </div>
+
+                        <button class="btn btn--primary" onclick="openQuoteModal()">BEZPŁATNA WYCENA</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Bulk Calculator Functionality
+    document.addEventListener('DOMContentLoaded', () => {
+        const quantitySlider = document.getElementById('quantity-slider') as HTMLInputElement | null;
+        const quantityDisplay = document.getElementById('quantity-display') as HTMLElement | null;
+        const discountPercent = document.getElementById('discount-percent') as HTMLElement | null;
+        const basePrice = document.getElementById('base-price') as HTMLElement | null;
+        const totalPrice = document.getElementById('total-price') as HTMLElement | null;
+        const discountAmount = document.getElementById('discount-amount') as HTMLElement | null;
+        const fuelType = document.getElementById('fuel-type') as HTMLSelectElement | null;
+
+        // Base prices per kg for each fuel type
+        const prices = {
+            premium: 1.20,    // 1.20 PLN per kg
+            excellent: 1.05,  // 1.05 PLN per kg
+            standard: 0.90    // 0.90 PLN per kg
+        };
+
+        if (quantitySlider && quantityDisplay && discountPercent && basePrice && totalPrice && discountAmount && fuelType) {
+            // Update calculations when slider changes
+            quantitySlider.addEventListener('input', () => {
+                updateQuantityDisplay();
+                calculatePrices();
+            });
+
+            // Update calculations when fuel type changes
+            fuelType.addEventListener('change', () => {
+                calculatePrices();
+            });
+
+            // Initial calculation
+            updateQuantityDisplay();
+            calculatePrices();
+
+            function updateQuantityDisplay() {
+                // Since we've checked quantitySlider and quantityDisplay in the outer scope,
+                // we can safely use them here
+                if (quantitySlider && quantityDisplay) {
+                    const quantity = quantitySlider.value;
+                    quantityDisplay.textContent = quantity;
+                }
+            }
+
+            function calculatePrices() {
+                // Since we've checked all elements in the outer scope,
+                // we can safely use them here, but add additional checks
+                if (!quantitySlider || !fuelType || !basePrice || !totalPrice || !discountPercent || !discountAmount) return;
+
+                const quantity = parseInt(quantitySlider.value);
+                const selectedFuel = fuelType.value as keyof typeof prices;
+                const pricePerKg = prices[selectedFuel];
+                let discount = 0;
+
+                // Calculate discount based on quantity
+                if (quantity >= 2500) {
+                    discount = 15;
+                } else if (quantity >= 2000) {
+                    discount = 12;
+                } else if (quantity >= 1500) {
+                    discount = 8;
+                } else if (quantity >= 1000) {
+                    discount = 5;
+                } else if (quantity >= 500) {
+                    discount = 3;
+                }
+
+                // Update discount percentage display
+                discountPercent.textContent = discount.toString();
+
+                // Calculate original price (without discount)
+                const originalPrice = quantity * pricePerKg;
+
+                // Calculate total price with discount
+                const discountMultiplier = 1 - (discount / 100);
+                const totalPriceValue = originalPrice * discountMultiplier;
+
+                // Calculate discount amount
+                const discountValue = originalPrice - totalPriceValue;
+
+                // Update price displays
+                basePrice.textContent = pricePerKg.toFixed(2);
+                totalPrice.textContent = totalPriceValue.toFixed(2);
+                discountAmount.textContent = discountValue.toFixed(2);
+
+                // Update discount message color based on discount level
+                const discountMessage = document.querySelector('.discount-message');
+                if (discountMessage) {
+                    // Remove all discount level classes
+                    discountMessage.classList.remove('discount-high', 'discount-medium', 'discount-low');
+
+                    // Add appropriate class based on discount level
+                    if (discount >= 10) {
+                        discountMessage.classList.add('discount-high');
+                    } else if (discount >= 5) {
+                        discountMessage.classList.add('discount-medium');
+                    } else {
+                        discountMessage.classList.add('discount-low');
+                    }
+                }
+            }
+        }
+    });
+</script>

@@ -1,0 +1,210 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Script from '../components/Script.astro';
+---
+
+<Layout title="Kontakt - Premium Pellets Co.">
+    <Script />
+    <main class="page-content active">
+        <section class="page-hero">
+            <div class="container">
+                <h1 class="page-hero__title">Skontaktuj się z nami</h1>
+                <p class="page-hero__subtitle">Jesteśmy tutaj, aby pomóc Ci w wyborze najlepszego pelletu</p>
+            </div>
+        </section>
+
+        <section class="contact-section">
+            <div class="container">
+                <div class="contact-grid">
+                    <!-- Contact Info -->
+                    <div class="contact-info">
+                        <div class="contact-card">
+                            <h3>Dane Kontaktowe</h3>
+                            <div class="contact-details">
+                                <div class="contact-item">
+                                    <span class="contact-icon">🏢</span>
+                                    <div>
+                                        <h4>Premium Pellets Co.</h4>
+                                        <p>ul. Pelletowa 123, 12-345 EkoMiasto</p>
+                                    </div>
+                                </div>
+                                <div class="contact-item">
+                                    <span class="contact-icon">📞</span>
+                                    <div>
+                                        <h4>Telefon</h4>
+                                        <p><a href="tel:128456789">128-456-789</a></p>
+                                        <small>pon-pt 8:00-17:00, sob 9:00-14:00</small>
+                                    </div>
+                                </div>
+                                <div class="contact-item">
+                                    <span class="contact-icon">✉️</span>
+                                    <div>
+                                        <h4>Email</h4>
+                                        <p><a href="mailto:info@pellety.pl">info@pellety.pl</a> - ogólne</p>
+                                        <p><a href="mailto:sprzedaz@pellety.pl">sprzedaz@pellety.pl</a> - handlowy</p>
+                                        <p><a href="mailto:tech@pellety.pl">tech@pellety.pl</a> - techniczny</p>
+                                    </div>
+                                </div>
+                                <div class="contact-item">
+                                    <span class="contact-icon">🏛️</span>
+                                    <div>
+                                        <h4>Dane rejestrowe</h4>
+                                        <p>NIP: 123-456-78-90</p>
+                                        <p>REGON: 123456789</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="contact-card">
+                            <h3>Godziny Pracy</h3>
+                            <div class="hours-list">
+                                <div class="hours-item">
+                                    <span>Poniedziałek - Piątek:</span>
+                                    <span>8:00 - 17:00</span>
+                                </div>
+                                <div class="hours-item">
+                                    <span>Sobota:</span>
+                                    <span>9:00 - 14:00</span>
+                                </div>
+                                <div class="hours-item">
+                                    <span>Niedziela:</span>
+                                    <span>Zamknięte</span>
+                                </div>
+                                <div class="hours-item">
+                                    <span>Święta:</span>
+                                    <span>Kontakt tylko mailowy</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="contact-form-container">
+                        <div class="contact-card">
+                            <h3>Formularz Kontaktowy</h3>
+                            <form id="contact-form" class="contact-form">
+                                <div class="form-group">
+                                    <label for="contact-name" class="form-label">Imię i nazwisko *</label>
+                                    <input type="text" id="contact-name" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contact-email" class="form-label">Email *</label>
+                                    <input type="email" id="contact-email" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contact-phone" class="form-label">Telefon *</label>
+                                    <input type="tel" id="contact-phone" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inquiry-type" class="form-label">Rodzaj zapytania</label>
+                                    <select id="inquiry-type" class="form-control">
+                                        <option value="oferta">Oferta cenowa</option>
+                                        <option value="techniczne">Pytanie techniczne</option>
+                                        <option value="reklamacja">Reklamacja</option>
+                                        <option value="inne">Inne</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="pellet-quantity" class="form-label">Ilość pelletu (kg)</label>
+                                    <input type="number" id="pellet-quantity" class="form-control" min="1" placeholder="np. 1000">
+                                </div>
+                                <div class="form-group">
+                                    <label for="contact-message" class="form-label">Wiadomość *</label>
+                                    <textarea id="contact-message" class="form-control" rows="4" required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="data-consent" required>
+                                        <span class="checkmark"></span>
+                                        Zgoda na przetwarzanie danych osobowych *
+                                    </label>
+                                </div>
+                                <button type="submit" class="btn btn--primary btn--full-width">Wyślij zapytanie</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="location-info">
+                    <h3>Lokalizacja i Dojazd</h3>
+                    <div class="location-grid">
+                        <div class="location-item">
+                            <h4>🚗 Dojazd samochodem</h4>
+                            <p>Znajdujemy się przy głównej drodze krajowej nr 7, 5 km od centrum EkoMiasta. Wjazd od strony północnej, wyraźnie oznakowany.</p>
+                        </div>
+                        <div class="location-item">
+                            <h4>🅿️ Parking dla klientów</h4>
+                            <p>Bezpłatny parking dla 20 samochodów osobowych. Miejsca dla samochodów ciężarowych w strefie załadunkowej.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</Layout>
+
+<style>
+
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const contactForm = document.getElementById('contact-form');
+
+        if (contactForm) {
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                // Get form data
+                const data = {
+                    name: document.getElementById('contact-name')?.value || '',
+                    email: document.getElementById('contact-email')?.value || '',
+                    phone: document.getElementById('contact-phone')?.value || '',
+                    inquiryType: document.getElementById('inquiry-type')?.value || '',
+                    quantity: document.getElementById('pellet-quantity')?.value || '',
+                    message: document.getElementById('contact-message')?.value || '',
+                    dataConsent: document.getElementById('data-consent')?.checked || false
+                };
+
+                // Validate required fields
+                if (!data.name || !data.email || !data.phone || !data.message) {
+                    window.showNotification('Proszę wypełnić wszystkie wymagane pola.', 'error');
+                    return;
+                }
+
+                // Validate data consent
+                if (!data.dataConsent) {
+                    window.showNotification('Proszę wyrazić zgodę na przetwarzanie danych osobowych.', 'error');
+                    return;
+                }
+
+                // Validate email format
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(data.email)) {
+                    window.showNotification('Proszę podać prawidłowy adres email.', 'error');
+                    return;
+                }
+
+                // Simulate form submission
+                const submitButton = contactForm.querySelector('button[type="submit"]');
+                const originalText = submitButton.textContent;
+
+                submitButton.textContent = 'Wysyłanie...';
+                submitButton.disabled = true;
+
+                // Simulate API call
+                setTimeout(() => {
+                    window.showNotification('Wiadomość została wysłana! Odpowiemy w ciągu 24 godzin.', 'success');
+
+                    // Reset form
+                    contactForm.reset();
+
+                    // Reset button
+                    submitButton.textContent = originalText;
+                    submitButton.disabled = false;
+                }, 2000);
+            });
+        }
+    });
+</script>

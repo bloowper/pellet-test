@@ -1,0 +1,73 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Script from '../components/Script.astro';
+import Calculator from '../components/Calculator.astro';
+---
+
+<Layout title="Premium Pellets Co. - Premium Pellet Drzewny">
+    <Script />
+    <!-- Home Page -->
+    <main class="page-content active">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero__content">
+                    <div class="hero__left">
+                        <!--<div class="badges">-->
+                        <!--    <div class="badge">-->
+                        <!--        <span class="cert-icon">⭐</span>-->
+                        <!--        <span>Certyfikat ENplus A1</span>-->
+                        <!--    </div>-->
+                        <!--    <div class="badge">-->
+                        <!--        <span class="cert-icon"></span>-->
+                        <!--        <span>Lokalna firma</span>-->
+                        <!--    </div>-->
+                        <!--    <div class="badge">-->
+                        <!--        <span class="cert-icon"></span>-->
+                        <!--        <span>Szybka realizacja zamówienia</span>-->
+                        <!--    </div>-->
+                        <!--</div>-->
+
+                        <!-- Main Headline -->
+                        <h1 class="hero__headline">Premium Pellet Drzewny dla Czystszego, Inteligentniejszego Ogrzewania</h1>
+
+                        <!-- Features List -->
+                        <ul class="hero__features">
+                            <li class="feature-item">
+                                <span class="checkmark">✓</span>
+                                <span>Certyfikat ENplus A1</span>
+                            </li>
+                            <li class="feature-item">
+                                <span class="checkmark">✓</span>
+                                <span>Dostawa następnego dnia</span>
+                            </li>
+                            <li class="feature-item">
+                                <span class="checkmark">✓</span>
+                                <span>Rabaty hurtowe dostępne</span>
+                            </li>
+                        </ul>
+
+                        <!-- CTA Buttons -->
+                        <div class="hero__cta">
+                            <button class="btn btn--primary btn--lg" onclick="window.location.href='tel:128456789'">ZAMÓW TERAZ - ZADZWOŃ</button>
+                        </div>
+                    </div>
+
+                    <div class="hero__right">
+                        <div class="hero__visual">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Calculator Component -->
+        <Calculator />
+    </main>
+</Layout>
+
+<style>
+
+</style>
+
